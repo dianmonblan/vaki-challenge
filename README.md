@@ -65,6 +65,10 @@ Run `ng g component my-component --project=my-app` to generate a new component.
 
 Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+## Server-side rendering (SSR) with Angular Universal
+
+Run `npm run build:ssr && npm run serve:ssr` to renders application on the server. The build artifacts will be stored in the `dist/` directory.
+
 ## Running unit tests
 
 Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).

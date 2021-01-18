@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "vaki-challenge-2021": {
+      "hosting": {
+        "vakers": [
+          "vaki-challenge-2021"
+        ]
+      }
+    }
+  }
+}

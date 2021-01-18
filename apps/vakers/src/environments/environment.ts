@@ -2,12 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { CONFIG } from '@vaki-challenge/configuration';
+// CUSTOM LIBRARIES
+import { CONFIG, ConfigurationInterface, GOOGLE } from '@vaki-challenge/configuration';
 
-export const environment = {
-  ...CONFIG,
-  ...{ production: false }
-};
+let config: ConfigurationInterface = Object.assign({}, CONFIG);
+config.production = false;
+config.google = GOOGLE;
+
+export const environment: any = config;
 
 /*
  * For easier debugging in development mode, you can import the following file

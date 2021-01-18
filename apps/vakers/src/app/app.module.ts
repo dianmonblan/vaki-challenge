@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule, FirebaseOptions } from '@angular/fire';
 import { environment } from '../environments/environment';
 
 // CUSTOM COMPONENTS
@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AngularFireModule.initializeApp(environment.google.firebase)
+    AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase'])
   ],
   providers: [],
   bootstrap: [AppComponent],

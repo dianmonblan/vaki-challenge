@@ -6,6 +6,12 @@ This project was generated using [Nx](https://nx.dev).
 
 🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
+## IMPORTANT: Node.js version >= 12
+
+**Recommendation Node Version Manager:** nvm is a version manager for node.js, designed to be installed per-user, and invoked per-shell. nvm works on any POSIX-compliant shell (sh, dash, ksh, zsh, bash), in particular on these platforms: unix, macOS, and windows WSL.
+
+[nvm Documentation](https://github.com/nvm-sh/nvm)
+
 ## Quick Start & Documentation
 
 [Nx Documentation](https://nx.dev/angular)

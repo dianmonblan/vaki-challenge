@@ -1,6 +1,7 @@
 {
   "name": "vaki-challenge",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "homepage": "https://ni500.gitbook.io/full-stack-challenge/",
   "license": "MIT",
   "scripts": {
     "ng": "nx",

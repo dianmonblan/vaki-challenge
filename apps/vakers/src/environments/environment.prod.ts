@@ -1,3 +1,6 @@
+import { CONFIG } from '@vaki-challenge/configuration';
+
 export const environment = {
-  production: true,
+  ...CONFIG,
+  ...{ production: true }
 };

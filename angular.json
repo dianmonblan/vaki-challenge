@@ -16,13 +16,8 @@
             "polyfills": "apps/vakers/src/polyfills.ts",
             "tsConfig": "apps/vakers/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "apps/vakers/src/favicon.ico",
-              "apps/vakers/src/assets"
-            ],
-            "styles": [
-              "apps/vakers/src/styles.less"
-            ],
+            "assets": ["apps/vakers/src/favicon.ico", "apps/vakers/src/assets"],
+            "styles": ["apps/vakers/src/styles.less"],
             "scripts": []
           },
           "configurations": {
@@ -83,9 +78,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/vakers"
-          ],
+          "outputs": ["coverage/apps/vakers"],
           "options": {
             "jestConfig": "apps/vakers/jest.config.js",
             "passWithNoTests": true
@@ -130,9 +123,7 @@
           "options": {
             "browserTarget": "vakers:build:production",
             "serverTarget": "vakers:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
@@ -165,9 +156,28 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/vakers-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/vakers-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "configuration": {
+      "root": "libs/configuration",
+      "sourceRoot": "libs/configuration/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/configuration/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/configuration"],
+          "options": {
+            "jestConfig": "libs/configuration/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

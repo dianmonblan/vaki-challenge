@@ -1,6 +1,8 @@
-import { CONFIG } from '@vaki-challenge/configuration';
+// CUSTOM LIBRARIES
+import { CONFIG, ConfigurationInterface, GOOGLE } from '@vaki-challenge/configuration';
 
-export const environment = {
-  ...CONFIG,
-  ...{ production: true }
-};
+let config: ConfigurationInterface = Object.assign({}, CONFIG);
+config.production = true;
+config.google = GOOGLE;
+
+export const environment: any = config;

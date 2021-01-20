@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@vaki-challenge/configuration": ["libs/configuration/src/index.ts"]
+      "@vaki-challenge/configurations": ["libs/configurations/src/index.ts"],
+      "@vaki-challenge/models": ["libs/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -3,6 +3,7 @@ import { ModelAbstract } from './model-abstract.model';
 
 // CUSTOM INTERFACES
 import { VakiInterface } from '../interfaces/vaki.interface';
+import { CountryInterface } from '../interfaces/country.interface';
 
 export class VakiModel extends ModelAbstract implements VakiInterface {
   description: string;
@@ -13,5 +14,5 @@ export class VakiModel extends ModelAbstract implements VakiInterface {
   url: string;
   photo?: string;
   video?: string;
-  country: any;
+  country: CountryInterface['isoCode'];
 }

@@ -20,6 +20,6 @@
     "vakers-e2e": { "tags": [], "implicitDependencies": ["vakers"] },
     "configurations": { "tags": [] },
     "models": { "tags": [] },
-    "services": { "tags": [] }
+    "services": { "tags": [], "implicitDependencies": ["vakers"]  }
   }
 }

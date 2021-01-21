@@ -1,41 +1,17 @@
-import { CONFIG } from "./general";
-import { FIREBASE_GOOGLE } from "./google";
+// CUSTON CONFIGURATIONS
+import { CONFIG, FIREBASE_GOOGLE } from "./configurations";
 
 describe('configurations', () => {
   describe('general', () => {
-    it('declared version', () => {
-      expect(CONFIG).toHaveProperty('version');
-    });
-
-    it('declared homeversion', () => {
-      expect(CONFIG).toHaveProperty('homepage');
+    it('declared', () => {
+      expect(Object.keys(CONFIG)).toHaveLength(2);
     });
   });
 
   describe('google', () => {
     describe('firebase', () => {
-      it('declared apiKey', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('apiKey');
-      });
-
-      it('declared authDomain', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('authDomain');
-      });
-
-      it('declared projectId', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('projectId');
-      });
-
-      it('declared storageBucket', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('storageBucket');
-      });
-
-      it('declared messagingSenderId', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('messagingSenderId');
-      });
-
-      it('declared appId', () => {
-        expect(FIREBASE_GOOGLE).toHaveProperty('appId');
+      it('declared', () => {
+        expect(Object.keys(FIREBASE_GOOGLE)).toHaveLength(6);
       });
     });
   });

@@ -15,8 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@vaki-challenge/apps/*": ["apps/*"],
       "@vaki-challenge/configurations": ["libs/configurations/src/index.ts"],
-      "@vaki-challenge/models": ["libs/models/src/index.ts"]
+      "@vaki-challenge/models": ["libs/models/src/index.ts"],
+      "@vaki-challenge/services": ["libs/services/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

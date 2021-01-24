@@ -4,13 +4,14 @@ import { from, Observable } from 'rxjs';
 import firebase from 'firebase/app';
 
 // CUSTOM LIBRARIES
+import { COLLECTIONS_FIREBASE_GOOGLE } from '@vaki-challenge/configurations';
 import { VakiModel } from '@vaki-challenge/models';
 
 @Injectable()
 export class VakiFirestoreService {
   private _vakersCollection: AngularFirestoreCollection<VakiModel>;
   get collectionName(): string {
-    return 'vakers';
+    return COLLECTIONS_FIREBASE_GOOGLE.VAKERS;
   };
 
   constructor(private _angularFirestore: AngularFirestore) {

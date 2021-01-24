@@ -1,10 +1,14 @@
 // CUSTOM SERVICES
 import { VakiModel } from "./vaki.model";
 
-describe('VakiModel', () => {
-  let vakiModel: VakiModel = new VakiModel();
+describe('models', () => {
+  describe('models', () => {
+    describe('VakiModel', () => {
+      let vakiModel: VakiModel = new VakiModel();
 
-  it('created instance', () => {
-    expect(vakiModel).toBeInstanceOf(VakiModel);
+      it('should create the instance', () =>
+        expect(vakiModel).toBeInstanceOf(VakiModel)
+      );
+    });
   });
 });

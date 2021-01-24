@@ -1,1 +1,1 @@
-export * from "./firebase.google";
+export * from "./firebase/";

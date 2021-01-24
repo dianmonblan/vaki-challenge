@@ -10,16 +10,34 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@vaki-challenge/apps/*": ["apps/*"],
-      "@vaki-challenge/configurations": ["libs/configurations/src/index.ts"],
-      "@vaki-challenge/models": ["libs/models/src/index.ts"],
-      "@vaki-challenge/services": ["libs/services/src/index.ts"]
+      "@vaki-challenge/apps/*": [
+        "apps/*"
+      ],
+      "@vaki-challenge/configurations": [
+        "libs/configurations/src/index.ts",
+        "libs/configurations/src/tests.ts"
+      ],
+      "@vaki-challenge/configurations/test": [
+        "libs/configurations/src/tests.ts"
+      ],
+      "@vaki-challenge/models": [
+        "libs/models/src/index.ts"
+      ],
+      "@vaki-challenge/services": [
+        "libs/services/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

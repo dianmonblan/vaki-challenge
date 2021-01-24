@@ -16,8 +16,13 @@
             "polyfills": "apps/vakers/src/polyfills.ts",
             "tsConfig": "apps/vakers/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/vakers/src/favicon.ico", "apps/vakers/src/assets"],
-            "styles": ["apps/vakers/src/styles.less"],
+            "assets": [
+              "apps/vakers/src/favicon.ico",
+              "apps/vakers/src/assets"
+            ],
+            "styles": [
+              "apps/vakers/src/styles.less"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -78,7 +83,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/vakers"],
+          "outputs": [
+            "coverage/apps/vakers"
+          ],
           "options": {
             "jestConfig": "apps/vakers/jest.config.js",
             "passWithNoTests": true
@@ -89,7 +96,11 @@
           "options": {
             "outputPath": "dist/vakers/server",
             "main": "apps/vakers/server.ts",
-            "tsConfig": "apps/vakers/tsconfig.server.json"
+            "tsConfig": "apps/vakers/tsconfig.server.json",
+            "externalDependencies": [
+              "@firebase/app",
+              "@firebase/firestore"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,7 +134,9 @@
           "options": {
             "browserTarget": "vakers:build:production",
             "serverTarget": "vakers:server:production",
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {}
@@ -156,7 +169,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/vakers-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/vakers-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -169,12 +184,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/configurations/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/configurations/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/configurations"],
+          "outputs": [
+            "coverage/libs/configurations"
+          ],
           "options": {
             "jestConfig": "libs/configurations/jest.config.js",
             "passWithNoTests": true
@@ -190,12 +209,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/models/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/models/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/models"],
+          "outputs": [
+            "coverage/libs/models"
+          ],
           "options": {
             "jestConfig": "libs/models/jest.config.js",
             "passWithNoTests": true
@@ -211,12 +234,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/services/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/services/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/services"],
+          "outputs": [
+            "coverage/libs/services"
+          ],
           "options": {
             "jestConfig": "libs/services/jest.config.js",
             "passWithNoTests": true

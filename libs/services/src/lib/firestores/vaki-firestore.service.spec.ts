@@ -2,11 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { AngularFireModule, FirebaseOptions } from '@angular/fire';
 import { environment } from '@vaki-challenge/apps/vakers/src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ServerModule } from '@angular/platform-server';
 import { PLATFORM_ID } from '@angular/core';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 // CUSTOM SERVICES
 import { VakiFirestoreService } from "./vaki-firestore.service";
+import { AngularUniversalPlatformService } from "../general";
 
 // CUSTOM LIBRARIES;
 import { VakiModel } from "@vaki-challenge/models";
@@ -22,8 +23,8 @@ describe('services', () => {
       beforeEach(() => {
         TestBed.configureTestingModule({
           imports: [
-            ServerModule,
-            AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase'])
+            AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase']),
+            BrowserTransferStateModule
           ],
           providers: [
             {
@@ -34,7 +35,8 @@ describe('services', () => {
             {
               provide: PLATFORM_ID,
               useValue: 'browser'
-            }
+            },
+            AngularUniversalPlatformService
           ]
         });
 

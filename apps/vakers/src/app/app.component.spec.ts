@@ -2,12 +2,13 @@ import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/
 import { AngularFireModule, FirebaseOptions } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 // CUSTOM COMPONENTS
 import { AppComponent } from './app.component';
 
 // CUSTOM LIBRARIES
-import { VakiFirestoreService } from '@vaki-challenge/services';
+import { VakiFirestoreService, AngularUniversalPlatformService } from '@vaki-challenge/services';
 
 // MOCK DATABASE CLOUD FIRESTORE VAKI CHALLENGE APPLICATION
 import { AngularFirestoreMock } from "@vaki-challenge/configurations/test";
@@ -20,7 +21,8 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase'])
+        AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase']),
+        BrowserTransferStateModule
       ],
       declarations: [
         AppComponent
@@ -34,6 +36,7 @@ describe('AppComponent', () => {
           provide: AngularFirestore,
           useValue: new AngularFirestoreMock()
         },
+        AngularUniversalPlatformService,
         VakiFirestoreService
       ]
     }).compileComponents();

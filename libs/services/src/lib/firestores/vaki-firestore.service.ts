@@ -7,6 +7,8 @@ import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser
 // CUSTOM LIBRARIES
 import { COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE } from '@vaki-challenge/configurations';
 import { VakiModel } from '@vaki-challenge/models';
+
+// CUSTOM SERVICES
 import { AngularUniversalPlatformService } from '../general';
 
 export const VAKERS_STATE_KEY: StateKey<VakiModel[]> = makeStateKey(COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS);

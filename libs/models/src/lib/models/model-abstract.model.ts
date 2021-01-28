@@ -2,18 +2,18 @@
 import { ModelInterface } from "../interfaces/model.interface";
 
 export abstract class ModelAbstract implements ModelInterface {
-  private _scenario: string = null;
+  #scenario: string = null;
   get scenario(): string {
-    return this._scenario;
+    return this.#scenario;
   }
   set scenario(scenario: string) {
-    this._scenario = scenario;
+    this.#scenario = scenario;
     this._assignDeepScenario();
   }
 
-  private _isNew: boolean = true
+  #isNew: boolean = true
   get isNew(): boolean {
-    return this._isNew;
+    return this.#isNew;
   }
 
   // Position of the document on the total of documents.
@@ -91,7 +91,7 @@ export abstract class ModelAbstract implements ModelInterface {
       propertiesToExclude = context.constructor.propertiesToExclude;
 
     const getValue: Function = (value: any, namePropertyFather: string = null): any => {
-      let mappedValue: any = typeof value == 'string' && !value.length ? null : value;
+      let mappedValue: any = ['string'].includes(typeof value) && !value.length ? null : value;
 
       if (value != null) {
         if (value instanceof ModelAbstract)
@@ -110,11 +110,11 @@ export abstract class ModelAbstract implements ModelInterface {
             });
           else
             mappedValue = null;
-        } else if (typeof value == 'object') {
+        } else if (['object'].includes(typeof value)) {
           mappedValue = {};
 
           Object.keys(value).forEach((propertyName: string) => {
-            if (propertyName.substring(0, 1) != '_') {
+            if (!['_', '#'].includes(propertyName.substring(0, 1))) {
               let obtainedValue: any = getValue(value[propertyName], namePropertyFather);
 
               if (obtainedValue != null)
@@ -142,7 +142,7 @@ export abstract class ModelAbstract implements ModelInterface {
       // Only properties of level zero are excluded.
       if (!propertiesToExclude.includes(nameFullProperty)
         // Properties that start with a hyphen on the floor are removed as they represent private class properties.
-        && propertyName.substring(0, 1) != '_') {
+        && !['_', '#'].includes(propertyName.substring(0, 1))) {
         let obtainedValue: any = getValue(context[propertyName], nameFullProperty);
 
         if (obtainedValue != null)

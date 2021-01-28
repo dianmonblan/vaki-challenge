@@ -1,41 +1,46 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
-import firebase from 'firebase/app';
+import { AngularFirestore, AngularFirestoreCollection, CollectionReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 // CUSTOM LIBRARIES
-import { COLLECTIONS_FIREBASE_GOOGLE } from '@vaki-challenge/configurations';
+import { COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE } from '@vaki-challenge/configurations';
 import { VakiModel } from '@vaki-challenge/models';
 
 @Injectable()
 export class VakiFirestoreService {
-  private _vakersCollection: AngularFirestoreCollection<VakiModel>;
+  #vakersCollection: AngularFirestoreCollection<VakiModel>;
   get collectionName(): string {
-    return COLLECTIONS_FIREBASE_GOOGLE.VAKERS;
+    return COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS;
   };
 
-  constructor(private _angularFirestore: AngularFirestore) {
-    this._vakersCollection = this._angularFirestore.collection<VakiModel>(this.collectionName);
+  constructor(
+    private _angularFirestore: AngularFirestore
+  ) {
+    this.#vakersCollection = this._angularFirestore.collection<VakiModel>(this.collectionName);
   }
 
-  add(vaki: VakiModel) {
-    this._vakersCollection.add(vaki);
+  public add(vaki: VakiModel) {
+    this.#vakersCollection.add(vaki);
   }
 
-  update(vaki: VakiModel) {
-    this._vakersCollection.doc(`${vaki.url}`).update(vaki);
+  public update(vaki: VakiModel) {
+    this.#vakersCollection.doc(`${vaki.url}`).update(vaki);
   }
 
-  delete(vakiURL: string) {
-    this._vakersCollection.doc(`${vakiURL}`).delete();
+  public delete(vakiURL: string) {
+    this.#vakersCollection.doc(`${vakiURL}`).delete();
   }
 
-  list(options?: firebase.firestore.GetOptions): Observable<QuerySnapshot<VakiModel>> {
-    let list: Observable<QuerySnapshot<VakiModel>> | Promise<QuerySnapshot<VakiModel>> = this._vakersCollection.get(options)
-
-    if (list instanceof Promise)
-      list = from(list);
-
-    return list;
+  public list(): Observable<VakiModel[]> {
+    /**
+     * Required for unit tests when using the module Ts-Mock-Firebase
+     * used Promises and not Observable.
+     *
+     * We turn Promise into Observable.
+     */
+    return this._angularFirestore.collection<VakiModel>(
+      this.collectionName,
+      (collectionReference: CollectionReference) => collectionReference.orderBy("start_date").startAt(0).limit(100)
+    ).valueChanges();
   }
 }

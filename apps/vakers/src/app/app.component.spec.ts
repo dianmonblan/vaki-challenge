@@ -1,7 +1,7 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { AngularFireModule, FirebaseOptions } from '@angular/fire';
-import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 // CUSTOM COMPONENTS
 import { AppComponent } from './app.component';
@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 // CUSTOM LIBRARIES
 import { VakiFirestoreService } from '@vaki-challenge/services';
 
-// MOCK DATA BASE CLOUD FIRESTORE VAKI CHALLENGE APPLICATION
-import { firestore } from "@vaki-challenge/configurations/test";
+// MOCK DATABASE CLOUD FIRESTORE VAKI CHALLENGE APPLICATION
+import { AngularFirestoreMock } from "@vaki-challenge/configurations/test";
 
 describe('AppComponent', () => {
   let appComponent: AppComponent;
@@ -32,7 +32,7 @@ describe('AppComponent', () => {
         },
         {
           provide: AngularFirestore,
-          useValue: firestore.mocker
+          useValue: new AngularFirestoreMock()
         },
         VakiFirestoreService
       ]

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { QuerySnapshot } from '@firebase/firestore-types';
+import { Component, OnInit } from "@angular/core";
 
 // CUSTOM LIBRARIES
-import { VakiFirestoreService } from '@vaki-challenge/services';
+import { VakiFirestoreService } from "@vaki-challenge/services";
 import { VakiModel } from "@vaki-challenge/models";
 
 @Component({
   selector: 'vaki-challenge-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less'],
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
   public title: string = 'vakers';
@@ -19,6 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._vakiFirestoreService.list()
-      .subscribe((vakers: QuerySnapshot<VakiModel>) => this.title = vakers.docs[0].data().name);
+      .subscribe((vakers: VakiModel[]) => this.title = vakers[0].name);
   }
 }

@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
 // CUSTOM LIBRARIES
-import { VakiFirestoreService } from '@vaki-challenge/services';
+import { AngularUniversalPlatformService, VakiFirestoreService } from '@vaki-challenge/services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +16,7 @@ import { VakiFirestoreService } from '@vaki-challenge/services';
     AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase'])
   ],
   providers: [
+    AngularUniversalPlatformService,
     VakiFirestoreService
   ],
   bootstrap: [AppComponent],

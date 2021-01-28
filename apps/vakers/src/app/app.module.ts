@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule, FirebaseOptions } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -13,7 +13,8 @@ import { AngularUniversalPlatformService, VakiFirestoreService } from '@vaki-cha
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase'])
+    AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase']),
+    BrowserTransferStateModule
   ],
   providers: [
     AngularUniversalPlatformService,

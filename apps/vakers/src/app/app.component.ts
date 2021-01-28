@@ -10,7 +10,7 @@ import { VakiModel } from "@vaki-challenge/models";
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  public title: string = 'vakers';
+  public title: string = this._vakiFirestoreService.vakers?.[0].name ?? 'vakers';
 
   constructor(
     private _vakiFirestoreService: VakiFirestoreService

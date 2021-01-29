@@ -7,7 +7,6 @@ import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 // CUSTOM SERVICES
 import { VakiFirestoreService } from "./vaki-firestore.service";
-import { FirestoreService } from './firestore.service';
 import { AngularUniversalPlatformService } from "../general";
 
 // CUSTOM LIBRARIES;
@@ -32,7 +31,6 @@ describe('services', () => {
               provide: AngularFirestore,
               useValue: new AngularFirestoreMock()
             },
-            FirestoreService,
             VakiFirestoreService,
             {
               provide: PLATFORM_ID,

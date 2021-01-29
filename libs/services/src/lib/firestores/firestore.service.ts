@@ -4,9 +4,6 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StateKey, TransferState } from '@angular/platform-browser';
 
-// CUSTOM LIBRARIES
-import { COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE } from '@vaki-challenge/configurations';
-
 // CUSTOM SERVICES
 import { AngularUniversalPlatformService } from '../general';
 

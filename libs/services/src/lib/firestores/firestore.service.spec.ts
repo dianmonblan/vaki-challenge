@@ -16,7 +16,7 @@ import { AngularFirestoreMock } from "@vaki-challenge/configurations/test";
 describe('services', () => {
   describe('firestores', () => {
     describe('FirestoreService', () => {
-      let firestoreService: FirestoreService<any>;
+      let vakiFirestoreService: VakiFirestoreService;
 
       beforeEach(() => {
         TestBed.configureTestingModule({
@@ -29,7 +29,6 @@ describe('services', () => {
               provide: AngularFirestore,
               useValue: new AngularFirestoreMock()
             },
-            FirestoreService,
             VakiFirestoreService,
             {
               provide: PLATFORM_ID,
@@ -39,11 +38,11 @@ describe('services', () => {
           ]
         });
 
-        firestoreService = TestBed.inject(FirestoreService);
+        vakiFirestoreService = TestBed.inject(VakiFirestoreService);
       });
 
       it('should create the instance', () =>
-        expect(firestoreService).toBeInstanceOf(FirestoreService)
+        expect(vakiFirestoreService).toBeInstanceOf(FirestoreService)
       );
     });
   });

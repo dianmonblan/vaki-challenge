@@ -10,16 +10,13 @@ import { VakiFirestoreService } from "./vaki-firestore.service";
 import { FirestoreService } from './firestore.service';
 import { AngularUniversalPlatformService } from "../general";
 
-// CUSTOM LIBRARIES;
-import { VakiModel } from "@vaki-challenge/models";
-
 // MOCK DATABASE CLOUD FIRESTORE VAKI CHALLENGE APPLICATION
 import { AngularFirestoreMock } from "@vaki-challenge/configurations/test";
 
 describe('services', () => {
   describe('firestores', () => {
-    describe('VakiFirestoreService', () => {
-      let vakiFirestoreService: VakiFirestoreService;
+    describe('FirestoreService', () => {
+      let firestoreService: FirestoreService<any>;
 
       beforeEach(() => {
         TestBed.configureTestingModule({
@@ -42,23 +39,11 @@ describe('services', () => {
           ]
         });
 
-        vakiFirestoreService = TestBed.inject(VakiFirestoreService);
+        firestoreService = TestBed.inject(FirestoreService);
       });
 
       it('should create the instance', () =>
-        expect(vakiFirestoreService).toBeInstanceOf(VakiFirestoreService)
-      );
-
-      it('should have a collection name', () =>
-        expect(vakiFirestoreService.collectionName).not.toBeNull()
-      );
-
-      it(`should have a method 'list' with the name 'Vaki name' on first document`, (done: Function) =>
-        vakiFirestoreService.list()
-          .subscribe((vakers: VakiModel[]) => {
-            expect(vakers[0].name).toEqual("Vaki name");
-            done();
-          })
+        expect(firestoreService).toBeInstanceOf(FirestoreService)
       );
     });
   });

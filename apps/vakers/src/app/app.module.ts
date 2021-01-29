@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
 // CUSTOM LIBRARIES
-import { AngularUniversalPlatformService, VakiFirestoreService } from '@vaki-challenge/services';
+import { AngularUniversalPlatformService, VakiFirestoreService, FirestoreService } from '@vaki-challenge/services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +18,7 @@ import { AngularUniversalPlatformService, VakiFirestoreService } from '@vaki-cha
   ],
   providers: [
     AngularUniversalPlatformService,
+    FirestoreService,
     VakiFirestoreService
   ],
   bootstrap: [AppComponent],

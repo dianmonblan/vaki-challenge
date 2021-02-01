@@ -6,10 +6,15 @@ import { QueryFn } from '@angular/fire/firestore';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
-// CUSTOM LIBRARIES
+// CUSTOM CONFIGURATIONS
 import { COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE } from "./firebase.google";
 
 const DATABASE_CLOUD_FIRESTORE: { [collectionName: string]: any } = {
+  tests: {
+    testOne: {
+      name: "Test one"
+    }
+  },
   [COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS]: {
     vakiOne: {
       name: "Vaki name"

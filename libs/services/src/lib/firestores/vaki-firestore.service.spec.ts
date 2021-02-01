@@ -7,9 +7,10 @@ import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 // CUSTOM SERVICES
 import { VakiFirestoreService } from "./vaki-firestore.service";
-import { AngularUniversalPlatformService } from "../general";
+import { AngularUniversalPlatformService } from "../helpers/angular-universal-platform.service";
+import { FirestoreAbstractService } from './firestore-abstract.service';
 
-// CUSTOM LIBRARIES;
+// CUSTOM MODELS
 import { VakiModel } from "@vaki-challenge/models";
 
 // MOCK DATABASE CLOUD FIRESTORE VAKI CHALLENGE APPLICATION
@@ -43,11 +44,11 @@ describe('services', () => {
         vakiFirestoreService = TestBed.inject(VakiFirestoreService);
       });
 
-      it('should create the instance', () =>
-        expect(vakiFirestoreService).toBeInstanceOf(VakiFirestoreService)
+      it(`should create the instance extending 'FirestoreAbstractService'`, () =>
+        expect(vakiFirestoreService).toBeInstanceOf(FirestoreAbstractService)
       );
 
-      it('should have a collection name', () =>
+      it(`should have a property 'collectionName'`, () =>
         expect(vakiFirestoreService.collectionName).not.toBeNull()
       );
 

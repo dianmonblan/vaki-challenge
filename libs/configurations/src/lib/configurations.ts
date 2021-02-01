@@ -1,3 +1,3 @@
 export * from "./interfaces/";
-export * from "./general/";
+export * from "./configurations/";
 export * from "./google/";

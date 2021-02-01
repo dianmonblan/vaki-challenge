@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
 // CUSTOM COMPONENTS
 import { AppComponent } from './app.component';
 
-// CUSTOM LIBRARIES
+// CUSTOM SERVICES
 import { AngularUniversalPlatformService, VakiFirestoreService } from '@vaki-challenge/services';
 
 @NgModule({

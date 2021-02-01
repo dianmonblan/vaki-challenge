@@ -1,2 +1,2 @@
-export * from "./firestore.service";
+export * from "./firestore-abstract.service";
 export * from "./vaki-firestore.service";

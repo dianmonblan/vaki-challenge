@@ -2,6 +2,14 @@
 import { ModelInterface } from "../interfaces/model.interface";
 
 export abstract class ModelAbstract implements ModelInterface {
+  #id: string = null;
+  get id(): string {
+    return this.#id;
+  }
+  set id(id: string) {
+    this.#id = id;
+  }
+
   #scenario: string = null;
   get scenario(): string {
     return this.#scenario;
@@ -11,9 +19,8 @@ export abstract class ModelAbstract implements ModelInterface {
     this._assignDeepScenario();
   }
 
-  #isNew: boolean = true
   get isNew(): boolean {
-    return this.#isNew;
+    return !!this.#id;
   }
 
   // Position of the document on the total of documents.
@@ -24,6 +31,7 @@ export abstract class ModelAbstract implements ModelInterface {
    * which returns the name of the properties with their respective values.
    */
   public static propertiesToExclude: string[] = [
+    'id',
     'scenario',
     'isNew'
   ]
@@ -32,11 +40,6 @@ export abstract class ModelAbstract implements ModelInterface {
    * Controls to exclude when declaring a form through the model..
    */
   public static controlsToExclude: string[] = ModelAbstract.propertiesToExclude;
-
-  constructor(scenario?: string) {
-    if (scenario)
-      this.scenario = scenario;
-  }
 
   private _assignDeepScenario(): void {
     let context: any = this;
@@ -53,14 +56,6 @@ export abstract class ModelAbstract implements ModelInterface {
 
   protected _removeAssignmentOfIllegalValues(values: any): any {
     /*
-     * It is not allowed to define if the document is new due to the 
-     * behavioral security of the model itself. This assignment is 
-     * defined by the model itself in bae to its id.
-     */
-    if (values && values.isNew)
-      delete values.isNew;
-
-    /*
      * Scenario change in assigning values to the model is not allowed
      * for instance behavior safety, such assignment must be done 
      * through the constructor or directly through its scenarioproperty.
@@ -71,16 +66,16 @@ export abstract class ModelAbstract implements ModelInterface {
     return values;
   }
 
-  public assignValues(values: any): void {
+  public setValues(values: any): void {
     if (values) {
       values = this._removeAssignmentOfIllegalValues(values);
       Object.assign(this, values);
     }
   }
 
-  public getInformation(level: number = 0, propertiesToExclude: Array<string> = [], namePropertyFather: string = null): { [key: string]: any } | null {
+  public getInformation(level: number = 0, propertiesToExclude: Array<string> = [], namePropertyFather: string = null): any {
     const context: any = this;
-    let data: { [key: string]: any } = {};
+    let data: any = {};
 
     /**
      * Unwanted properties to exclude when calling the static property 

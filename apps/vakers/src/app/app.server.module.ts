@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 
-// CUSTOM COMPONENTS
+// CUSTOM MODULES
 import { AppModule } from './app.module';
+
+// CUSTOM COMPONENTS
 import { AppComponent } from './app.component';
 
 @NgModule({

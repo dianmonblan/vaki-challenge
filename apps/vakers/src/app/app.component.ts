@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
-// CUSTOM LIBRARIES
+// CUSTOM SERVICES
 import { VakiFirestoreService } from "@vaki-challenge/services";
+
+// CUSTOM MODELS
 import { VakiModel } from "@vaki-challenge/models";
 
 @Component({
@@ -10,7 +12,7 @@ import { VakiModel } from "@vaki-challenge/models";
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  public title: string = this._vakiFirestoreService.documents?.[0].name ?? 'vakers';
+  public title: string = this._vakiFirestoreService.getDocuments()?.[0].name || 'vakers';
 
   constructor(
     private _vakiFirestoreService: VakiFirestoreService

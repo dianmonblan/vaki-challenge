@@ -5,7 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { AngularUniversalPlatformService } from './angular-universal-platform.service';
 
 describe('services', () => {
-  describe('general', () => {
+  describe('helpers', () => {
     describe('AngularUniversalPlatformService', () => {
       let angularUniversalPlatformService: AngularUniversalPlatformService;
 

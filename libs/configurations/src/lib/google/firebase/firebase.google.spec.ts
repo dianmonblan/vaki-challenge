@@ -1,3 +1,4 @@
+// CUSTOM CONFIGURATIONS
 import { FIREBASE_GOOGLE } from "./firebase.google";
 
 describe('configurations ', () => {

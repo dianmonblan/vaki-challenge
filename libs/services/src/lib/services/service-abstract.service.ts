@@ -28,7 +28,7 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
 
   private createMakeStateKeyDocument(): void {
     if (!this.#stateKeyDocument)
-      this.#stateKeyDocument = makeStateKey<M[]>(`${this.stateKey.toString()}_document`);
+      this.#stateKeyDocument = makeStateKey<M>(`${this.stateKey.toString()}_document`);
   }
 
   private createMakeStateKeyList(): void {
@@ -40,7 +40,7 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
     this.createMakeStateKeyDocument();
 
     if (this._angularUniversalPlatformService.isServer())
-      this._transferState.set<M>(this.stateKey, this.#document = value);
+      this._transferState.set<M>(this.#stateKeyDocument, this.#document = value);
   }
 
   protected setTransferStateList(values: M[]): void {
@@ -53,7 +53,7 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
   public getDocument(scenario?: string): M {
     this.createMakeStateKeyDocument();
 
-    let values: M = this._transferState.get<M>(this.stateKey, this.#document);
+    let values: M = this._transferState.get<M>(this.#stateKeyDocument, this.#document);
     return values ? this.createModelInstance(values, scenario) : values;
   };
 

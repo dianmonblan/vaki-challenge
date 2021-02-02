@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
+import { StateKey, TransferState } from '@angular/platform-browser';
 
 // CUSTOM SERVICES
 import { AngularUniversalPlatformService } from '../helpers';

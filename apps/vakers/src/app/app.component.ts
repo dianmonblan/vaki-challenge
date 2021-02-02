@@ -12,14 +12,14 @@ import { VakiModel } from "@vaki-challenge/models";
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  public title: string = this._vakiFirestoreService.getDocuments()?.[0].name || 'vakers';
+  public title: string = this._vakiFirestoreService.getDocument()?.name || 'vakers';
 
   constructor(
     private _vakiFirestoreService: VakiFirestoreService
   ) { }
 
   ngOnInit(): void {
-    this._vakiFirestoreService.list()
-      .subscribe((vakers: VakiModel[]) => this.title = vakers[0].name);
+    this._vakiFirestoreService.document('6gCLvPJazQpn3fiTcEct')
+      .subscribe((vaki: VakiModel) => this.title = vaki.name);
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { StateKey, TransferState } from '@angular/platform-browser';
+import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 
 // CUSTOM SERVICES
 import { AngularUniversalPlatformService } from '../helpers';
@@ -14,9 +14,9 @@ import { CreateModelIntance, ModelAbstract } from '@vaki-challenge/models';
 @Injectable()
 export abstract class FirestoreAbstractService<M extends ModelAbstract> extends ServiceAbstractService<M> {
   #angularFirestore: AngularFirestore;
-  protected abstract _modelClass: CreateModelIntance<M>;
+  protected readonly abstract _modelClass: CreateModelIntance<M>;
   public readonly abstract collectionName: string;
-  public readonly abstract stateKey: StateKey<M[]>;
+  public readonly abstract stateKey: StateKey<M>;
 
   constructor(
     protected _angularUniversalPlatformService: AngularUniversalPlatformService,
@@ -25,6 +25,14 @@ export abstract class FirestoreAbstractService<M extends ModelAbstract> extends 
   ) {
     super();
     this.#angularFirestore = angularFirestore;
+  }
+
+  public document(id: string, scenario?: string): Observable<M> {
+    return this.#angularFirestore.doc<M>(`${this.collectionName}/${id}`)
+      .valueChanges().pipe(
+        tap((value: M) => this.setTransferStateDocument(value)),
+        map((value: M) => this.createModelInstance(value, scenario))
+      );
   }
 
   public list(scenario?: string): Observable<M[]> {
@@ -38,7 +46,7 @@ export abstract class FirestoreAbstractService<M extends ModelAbstract> extends 
           return values;
         })
       ),
-      tap((values: M[]) => this.setTransferState(values)),
+      tap((values: M[]) => this.setTransferStateList(values)),
       map((values: M[]) => values.map((values: M) => this.createModelInstance(values, scenario)))
     );
   }

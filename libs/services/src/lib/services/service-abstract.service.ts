@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StateKey, TransferState } from '@angular/platform-browser';
+import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 
 // CUSTOM MODELS
 import { CreateModelIntance, ModelAbstract } from '@vaki-challenge/models';
@@ -10,11 +10,14 @@ import { AngularUniversalPlatformService } from '@vaki-challenge/services';
 
 @Injectable()
 export abstract class ServiceAbstractService<M extends ModelAbstract> {
-  protected _documents: M[];
-  protected abstract _modelClass: CreateModelIntance<M>;
+  #document: M;
+  #documents: M[];
+  #stateKeyDocument: StateKey<M>;
+  #stateKeyList: StateKey<M[]>;
+  protected readonly abstract _modelClass: CreateModelIntance<M>;
   protected abstract _angularUniversalPlatformService: AngularUniversalPlatformService;
-  protected abstract _transferState: TransferState
-  public readonly abstract stateKey: StateKey<M[]>;
+  protected abstract _transferState: TransferState;
+  public readonly abstract stateKey: StateKey<M>;
 
   protected createModelInstance(values: M, scenario?: string): M {
     let modelInstance: M = new this._modelClass();
@@ -23,18 +26,47 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
     return modelInstance;
   }
 
-  protected setTransferState(values: M[]): void {
-    if (this._angularUniversalPlatformService.isServer())
-      this._transferState.set<M[]>(this.stateKey, this._documents = values);
+  private createMakeStateKeyDocument(): void {
+    if (!this.#stateKeyDocument)
+      this.#stateKeyDocument = makeStateKey<M[]>(`${this.stateKey.toString()}_document`);
   }
 
+  private createMakeStateKeyList(): void {
+    if (!this.#stateKeyList)
+      this.#stateKeyList = makeStateKey<M[]>(`${this.stateKey.toString()}_list`);
+  }
+
+  protected setTransferStateDocument(value: M): void {
+    this.createMakeStateKeyDocument();
+
+    if (this._angularUniversalPlatformService.isServer())
+      this._transferState.set<M>(this.stateKey, this.#document = value);
+  }
+
+  protected setTransferStateList(values: M[]): void {
+    this.createMakeStateKeyList();
+
+    if (this._angularUniversalPlatformService.isServer())
+      this._transferState.set<M[]>(this.#stateKeyList, this.#documents = values);
+  }
+
+  public getDocument(scenario?: string): M {
+    this.createMakeStateKeyDocument();
+
+    let values: M = this._transferState.get<M>(this.stateKey, this.#document);
+    return values ? this.createModelInstance(values, scenario) : values;
+  };
+
   public getDocuments(scenario?: string): M[] {
-    return this._transferState.get<M[]>(this.stateKey, this._documents)
+    this.createMakeStateKeyList();
+
+    return this._transferState.get<M[]>(this.#stateKeyList, this.#documents)
       ?.map((values: M, position: number) => {
         values.position = ++position;
         return this.createModelInstance(values, scenario);
       });
   };
 
+  public abstract document(id: string, scenario?: string): Observable<M>;
   public abstract list(scenario?: string): Observable<M[]>;
 }

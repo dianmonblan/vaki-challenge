@@ -12,7 +12,7 @@ import { FirestoreAbstractService } from './firestore-abstract.service';
 
 @Injectable()
 export class VakiFirestoreService extends FirestoreAbstractService<VakiModel>{
-  protected _modelClass: CreateModelIntance<VakiModel> = VakiModel;
-  public collectionName: string = COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS;
-  public stateKey: StateKey<VakiModel[]> = makeStateKey(COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS);
+  protected readonly _modelClass: CreateModelIntance<VakiModel> = VakiModel;
+  public readonly collectionName: string = COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS;
+  public readonly stateKey: StateKey<VakiModel> = makeStateKey(COLLECTIONS_NAME_DATABASE_CLOUD_FIRESTORE.VAKERS);
 }

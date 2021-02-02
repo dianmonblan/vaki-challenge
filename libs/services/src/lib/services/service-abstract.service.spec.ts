@@ -6,15 +6,18 @@ import { AngularUniversalPlatformService } from "../helpers/angular-universal-pl
 import { ServiceAbstractService } from '../services/service-abstract.service';
 
 // CUSTOM MODELS
-import { CreateModelIntance, ModelAbstract } from '@vaki-challenge/models';
+import { CreateModelIntance, Model, ModelAbstract } from '@vaki-challenge/models';
 
 class TestModel extends ModelAbstract { }
 
-class ServiceTest extends ServiceAbstractService<TestModel>{
+class TestService extends ServiceAbstractService<TestModel>{
   protected _modelClass: CreateModelIntance<TestModel> = TestModel;
   protected _angularUniversalPlatformService: AngularUniversalPlatformService = new AngularUniversalPlatformService('blowser');
   protected _transferState: TransferState = new TransferState();
   public stateKey: StateKey<TestModel[]> = makeStateKey('tests');
+  public document(id: string, scenario?: string): Observable<TestModel> {
+    return of(null);
+  }
   public list(scenario?: string): Observable<TestModel[]> {
     return of(null);
   }
@@ -23,22 +26,34 @@ class ServiceTest extends ServiceAbstractService<TestModel>{
 describe('services', () => {
   describe('services', () => {
     describe('ServiceAbstractService', () => {
-      let serviceTest: ServiceTest = new ServiceTest();
+      let testService: TestService = new TestService();
 
       it('should existing', () =>
-        expect(serviceTest).toBeInstanceOf(ServiceAbstractService)
+        expect(testService).toBeInstanceOf(ServiceAbstractService)
       );
 
       it(`should have a property 'stateKey'`, () =>
-        expect(serviceTest.stateKey).not.toBeNull()
+        expect(testService.stateKey).not.toBeNull()
+      );
+
+      it(`should have a method 'getDocument'`, () =>
+        expect(testService.getDocument()).toBeUndefined()
       );
 
       it(`should have a method 'getDocuments'`, () =>
-        expect(serviceTest.getDocuments()).toBeUndefined()
+        expect(testService.getDocuments()).toBeUndefined()
       );
 
-      it(`should have a method 'list'`, (done: Function) =>
-        serviceTest.list().subscribe((models: TestModel[]) => {
+      it(`should have a abstract method 'document'`, (done: Function) =>
+        testService.document(null)
+          .subscribe((model: Model) => {
+            expect(model).toBeNull();
+            done();
+          })
+      );
+
+      it(`should have a abstract method 'list'`, (done: Function) =>
+        testService.list().subscribe((models: TestModel[]) => {
           expect(models).toBeNull();
           done();
         })

@@ -19,7 +19,7 @@ import { CreateModelIntance, Model, ModelAbstract } from '@vaki-challenge/models
 class TestModel extends ModelAbstract { }
 
 @Injectable()
-class ServiceTest extends FirestoreAbstractService<TestModel>{
+class TestService extends FirestoreAbstractService<TestModel>{
   protected _modelClass: CreateModelIntance<TestModel> = TestModel;
   public collectionName: string = 'tests';
   public stateKey: StateKey<TestModel[]> = makeStateKey('tests');
@@ -28,7 +28,7 @@ class ServiceTest extends FirestoreAbstractService<TestModel>{
 describe('services', () => {
   describe('firestores', () => {
     describe('FirestoreAbstractService', () => {
-      let serviceTest: ServiceTest;
+      let testService: TestService;
 
       beforeEach(() => {
         TestBed.configureTestingModule({
@@ -41,7 +41,7 @@ describe('services', () => {
               provide: AngularFirestore,
               useValue: new AngularFirestoreMock()
             },
-            ServiceTest,
+            TestService,
             {
               provide: PLATFORM_ID,
               useValue: 'browser'
@@ -50,22 +50,30 @@ describe('services', () => {
           ]
         });
 
-        serviceTest = TestBed.inject(ServiceTest);
+        testService = TestBed.inject(TestService);
       });
 
       it(`should existing and extending 'ServiceAbstractService'`, () => {
-        expect(serviceTest).toBeInstanceOf(FirestoreAbstractService)
-        expect(serviceTest).toBeInstanceOf(ServiceAbstractService)
+        expect(testService).toBeInstanceOf(FirestoreAbstractService)
+        expect(testService).toBeInstanceOf(ServiceAbstractService)
       });
 
       it(`should have a property 'collectionName'`, () =>
-        expect(serviceTest.collectionName).not.toBeNull()
+        expect(testService.collectionName).not.toBeNull()
+      );
+
+      it(`should have a method 'document'`, (done: Function) =>
+        testService.document('testOne')
+          .subscribe((model: Model) => {
+            expect(model).toHaveProperty('name');
+            done();
+          })
       );
 
       it(`should have a method 'list'`, (done: Function) =>
-        serviceTest.list()
+        testService.list()
           .subscribe((models: Model[]) => {
-            expect(models).not.toBeNull();
+            expect(Array.isArray(models)).toBeTruthy();
             done();
           })
       );

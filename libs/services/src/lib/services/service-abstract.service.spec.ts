@@ -14,7 +14,7 @@ class TestService extends ServiceAbstractService<TestModel>{
   protected _modelClass: CreateModelIntance<TestModel> = TestModel;
   protected _angularUniversalPlatformService: AngularUniversalPlatformService = new AngularUniversalPlatformService('blowser');
   protected _transferState: TransferState = new TransferState();
-  public stateKey: StateKey<TestModel[]> = makeStateKey('tests');
+  protected _nameStateKeyName: string = 'tests';
   public document(id: string, scenario?: string): Observable<TestModel> {
     return of(null);
   }
@@ -30,10 +30,6 @@ describe('services', () => {
 
       it('should existing', () =>
         expect(testService).toBeInstanceOf(ServiceAbstractService)
-      );
-
-      it(`should have a property 'stateKey'`, () =>
-        expect(testService.stateKey).not.toBeNull()
       );
 
       it(`should have a method 'getDocument'`, () =>

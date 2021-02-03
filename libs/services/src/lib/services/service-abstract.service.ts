@@ -17,7 +17,7 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
   protected readonly abstract _modelClass: CreateModelIntance<M>;
   protected abstract _angularUniversalPlatformService: AngularUniversalPlatformService;
   protected abstract _transferState: TransferState;
-  public readonly abstract stateKey: StateKey<M>;
+  protected readonly abstract _nameStateKeyName: string;
 
   protected createModelInstance(values: M, scenario?: string): M {
     let modelInstance: M = new this._modelClass();
@@ -28,12 +28,12 @@ export abstract class ServiceAbstractService<M extends ModelAbstract> {
 
   private createMakeStateKeyDocument(): void {
     if (!this.#stateKeyDocument)
-      this.#stateKeyDocument = makeStateKey<M>(`${this.stateKey.toString()}_document`);
+      this.#stateKeyDocument = makeStateKey<M>(`${this._nameStateKeyName}_document`);
   }
 
   private createMakeStateKeyList(): void {
     if (!this.#stateKeyList)
-      this.#stateKeyList = makeStateKey<M[]>(`${this.stateKey.toString()}_list`);
+      this.#stateKeyList = makeStateKey<M[]>(`${this._nameStateKeyName}_list`);
   }
 
   protected setTransferStateDocument(value: M): void {

@@ -52,10 +52,6 @@ describe('services', () => {
         expect(vakiFirestoreService.collectionName).not.toBeNull()
       );
 
-      it(`should have a property 'stateKey'`, () =>
-        expect(vakiFirestoreService.stateKey).not.toBeNull()
-      );
-
       it(`should have a method 'document' with the name 'Vaki name'`, (done: Function) =>
         vakiFirestoreService.document('vakiOne')
           .subscribe((vaki: VakiModel) => {

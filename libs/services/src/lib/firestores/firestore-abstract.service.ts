@@ -16,7 +16,9 @@ export abstract class FirestoreAbstractService<M extends ModelAbstract> extends 
   #angularFirestore: AngularFirestore;
   protected readonly abstract _modelClass: CreateModelIntance<M>;
   public readonly abstract collectionName: string;
-  public readonly abstract stateKey: StateKey<M>;
+  protected get _nameStateKeyName(): string {
+    return this.collectionName;
+  }
 
   constructor(
     protected _angularUniversalPlatformService: AngularUniversalPlatformService,

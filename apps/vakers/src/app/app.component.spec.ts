@@ -19,11 +19,6 @@ describe('AppComponent', () => {
   let h1: HTMLElement;
 
   beforeEach(() => {
-    // Create a fake VakiFirestoreService object with a `getDocument()` spy
-    // const vakiFirestoreService = spyOn(VakiFirestoreService, 'getDocument');
-    // // Make the spy return a synchronous Observable with the test data
-    // vakiFirestoreService.getDocument.and.returnValue(of(undefined));
-
     TestBed.configureTestingModule({
       imports: [
         AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase']),
@@ -56,11 +51,11 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy()
   );
 
-  it(`should have a title and contain in title 'Vaki name'`, () => 
+  it(`should have a title and contain in title 'Vaki name'`, () =>
     expect(appComponent.title).toContain('Vaki name')
   );
 
-  it(`should render h1 'Vaki name'`, () => 
+  it(`should render h1 'Vaki name'`, () =>
     expect(h1.textContent).toContain('Vaki name')
   );
 });

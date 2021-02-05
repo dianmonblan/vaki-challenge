@@ -18,8 +18,13 @@ describe('AppComponent', () => {
   let appComponentFixture: ComponentFixture<AppComponent>;
   let h1: HTMLElement;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    // Create a fake VakiFirestoreService object with a `getDocument()` spy
+    // const vakiFirestoreService = spyOn(VakiFirestoreService, 'getDocument');
+    // // Make the spy return a synchronous Observable with the test data
+    // vakiFirestoreService.getDocument.and.returnValue(of(undefined));
+
+    TestBed.configureTestingModule({
       imports: [
         AngularFireModule.initializeApp(<FirebaseOptions>environment.google['firebase']),
         BrowserTransferStateModule
@@ -43,6 +48,7 @@ describe('AppComponent', () => {
 
     appComponentFixture = TestBed.createComponent(AppComponent);
     appComponent = appComponentFixture.componentInstance;
+    appComponentFixture.detectChanges();
     h1 = appComponentFixture.nativeElement.querySelector('h1');
   });
 
@@ -50,15 +56,11 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy()
   );
 
-  it(`should have a title`, () =>
-    expect(appComponent).toHaveProperty('title')
-  );
-
-  it(`should contain in title 'Vaki name'`, () =>
+  it(`should have a title and contain in title 'Vaki name'`, () => 
     expect(appComponent.title).toContain('Vaki name')
   );
 
-  it(`should render h1 'Vaki name'`, () =>
+  it(`should render h1 'Vaki name'`, () => 
     expect(h1.textContent).toContain('Vaki name')
   );
 });

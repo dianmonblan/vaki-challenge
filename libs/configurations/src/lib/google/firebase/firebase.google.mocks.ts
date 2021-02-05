@@ -21,6 +21,9 @@ const DATABASE_CLOUD_FIRESTORE: { [collectionName: string]: any } = {
     },
     vakiTwo: {
       name: "Vaki two"
+    },
+    '6gCLvPJazQpn3fiTcEct': {
+      name: "Vaki name"
     }
   }
 }
